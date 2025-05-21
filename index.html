@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+<h1>Software Developer Technical Project</h1>
+<h2>By Olly Prince</h2>
+This program returns the catagory from 2 points acording to the EEMUA 191 Revision 3 chart:
+<hr>
+<form name="input">
+<label>X-axis:<input type="number" required id="x-axis" min="0" max="100" step="any"></label>
+<label>Y-axis:<input type="number" required id="y-axis" min="0" max="50" step="any"></label>
+<button type="button" onclick="submited()">Submit</button>
+</form>
+<hr>
+<p id="output"></p>
+<script>
+//I did not do any web design because i was not asked to, and i do not enjoy web design
+// lines are y = -15x + 25
+//           y = -25x + 75
+//           y = -25/8x + 56.25
+function submited()
+{
+    let yaxis = document.forms["input"]["y-axis"].value;
+    let xaxis = document.forms["input"]["x-axis"].value;;
+
+    let f1_y = -15 * xaxis + 25;
+    let f2_y = -25 * xaxis + 75;
+    let f3_y = -3.125 * xaxis + 56.25;
+
+    if (xaxis >= 10||yaxis >= f3_y)
+    {
+        //Checks if point is on boundary,if so gives a dual answer
+        result = xaxis==10 && yaxis<=25 || xaxis<10 && yaxis == f3_y ?"Overloaded/Reactive":"Overloaded";
+    }
+    else if (xaxis >= 2 || yaxis >= f2_y)
+    {
+        result =  xaxis==2 && yaxis<=25 || xaxis<2 && yaxis == f2_y ?"Reactive/Stable":"Reactive";
+    }
+    else if(xaxis >= 1 || yaxis >= f1_y)
+    {
+        result =  xaxis==1 && yaxis<=10 || xaxis<1 && yaxis == f1_y ?"Stable/Robust":"Stable";
+    }
+    else
+    {
+        result = "Robust";
+    }
+    document.getElementById("output").innerHTML = "Those Quordinates are: " + result;
+}
+</script>
+</body>
+</html> 
